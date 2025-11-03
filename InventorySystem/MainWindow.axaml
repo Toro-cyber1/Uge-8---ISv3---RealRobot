@@ -1,0 +1,59 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="InventorySystem.MainWindow"
+        x:CompileBindings="False"
+        Width="900" Height="520"
+        Title="Inventory System">
+    
+    <Grid ColumnDefinitions="*,Auto,*"
+          RowDefinitions="Auto,Auto,*,Auto,Auto">
+        
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="3"
+                   Margin="8" FontSize="18"
+                   Text="Item Sorter Robot" />
+        
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3"
+                    Orientation="Horizontal" Margin="8,0,8,0">
+            <TextBlock Text="Robot IP:" VerticalAlignment="Center" Margin="0,0,4,0"/>
+            <TextBox x:Name="IpBox" Width="140" Text="127.0.0.1"/>
+
+            <CheckBox x:Name="UseDryRun"
+                      Content="Dry run (simulator)"
+                      Margin="8,0,0,0"
+                      IsChecked="True"/>
+
+            <Button Content="Apply"
+                    Margin="8,0,0,0"
+                    Click="OnApplyRobotSettingsClick"/>
+        </StackPanel>
+
+        <!-- Queued -->
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="8">
+            <TextBlock Text="Queued Orders" FontWeight="Bold" Margin="0,0,0,4"/>
+            <ListBox ItemsSource="{Binding Queued}" />
+        </StackPanel>
+
+        <!-- Process button -->
+        <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
+            <Button Margin="8" Padding="12,6"
+                    Content="Process next order ➜"
+                    Click="OnProcessClick"/>
+        </StackPanel>
+
+        <!-- Processed -->
+        <StackPanel Grid.Row="2" Grid.Column="2" Margin="8">
+            <TextBlock Text="Processed Orders" FontWeight="Bold" Margin="0,0,0,4"/>
+            <ListBox ItemsSource="{Binding Processed}" />
+        </StackPanel>
+
+        <!-- Total revenue -->
+        <TextBlock x:Name="TotalText"
+                   Grid.Row="3" Grid.ColumnSpan="3" Margin="8"
+                   FontSize="16" />
+
+        <!-- Status -->
+        <TextBlock x:Name="StatusMessages"
+                   Grid.Row="4" Grid.ColumnSpan="3" Margin="8"
+                   TextWrapping="Wrap"/>
+    </Grid>
+</Window>
